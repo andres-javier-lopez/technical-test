@@ -27,4 +27,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function likedProducts()
+    {
+        $this->belongsToMany('App\Product', 'products_users_likes')->withTimestamps();
+    }
+
+    public function like(App\Product $product)
+    {
+        $this->likedProducts()->attach($product->id);
+    }
+
+    public function unlike(App\Product $product)
+    {
+        $this->likedProducts()->detach($product->id);
+    }
 }
