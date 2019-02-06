@@ -20,6 +20,7 @@ class Purchase extends JsonResource
             'unit_price' => $this->unit_price,
             'quantity' => $this->quantity,
             'total' => $this->total,
+            'date' => $this->created_at->toDateTimeString(),
         ];
     }
 }
