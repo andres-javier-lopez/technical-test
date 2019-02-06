@@ -30,7 +30,7 @@ class LogPriceModification
         {
             $update = new PriceUpdate();
             $update->product_id = $event->product->id;
-            $update->user_id = Auth::id();
+            $update->user_id = auth()->user()->id;
             $update->old_price = $event->old_price;
             $update->new_price = $event->product->price;
             $update->save();

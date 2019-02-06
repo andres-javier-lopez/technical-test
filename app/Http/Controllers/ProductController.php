@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Product;
 use App\Purchase;
 use App\Http\Resources\Product as ProductResource;
@@ -44,13 +43,13 @@ class ProductController extends Controller
 
     public function like(Product $product)
     {
-        Auth::user()->like($product);
+        auth('api')->user()->like($product);
         return response()->json(['status' => 'ok']);
     }
 
     public function unlike(Product $product)
     {
-        Auth::user()->unlike($product);
+        auth('api')->user()->unlike($product);
         return response()->json(['status' => 'ok']);
     }
 
@@ -104,7 +103,7 @@ class ProductController extends Controller
 
     public function purchase(Request $request, Product $product)
     {
-        $buyer = Auth::user();
+        $buyer = auth('api')->user();
         $quantity = (int) $request->input('quantity');
 
         if($quantity > $product->stock)
