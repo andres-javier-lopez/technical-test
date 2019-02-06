@@ -10,6 +10,7 @@ use App\User;
 use App\Http\Resources\Product as ProductResource;
 use App\Http\Resources\Products as ProductsResource;
 use App\Http\Resources\Purchase as PurchaseResource;
+use App\Events\PriceModified;
 
 class ProductController extends Controller
 {
@@ -60,7 +61,9 @@ class ProductController extends Controller
 
         if($request->has('price'))
         {
+            $old_price = $product->price;
             $product->price = $request->input('price');
+            event(new PriceModified($product, $old_price));
         }
 
         if($request->has('stock'))

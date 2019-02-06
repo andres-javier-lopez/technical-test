@@ -32,4 +32,5 @@ Route::put('/products/{product}', 'ProductController@update')->middleware('auth:
 Route::delete('/products/{product}', 'ProductController@delete')->middleware('auth:api', 'admin');
 Route::post('/products/{product}/purchase', 'ProductController@purchase')->middleware('auth:api');
 
-Route::get('/purchases', 'PurchaseController@index')->middleware('auth:api');
+Route::get('/purchase_history', 'HistoryController@purchaseHistory')->middleware('auth:api');
+Route::get('/price_history', 'HistoryController@priceHistory')->middleware('auth:api');
