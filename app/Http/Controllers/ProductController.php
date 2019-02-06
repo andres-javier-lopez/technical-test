@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Product;
+use App\User;
 use App\Http\Resources\Product as ProductResource;
 use App\Http\Resources\Products as ProductsResource;
 
@@ -20,18 +21,17 @@ class ProductController extends Controller
         return new ProductResource($product);
     }
 
-    public function like(Product $product)
+    public function like(Product $product, User $user)
     {
-        Auth::user()->like($product);
+       $user->like($product);
         return response()->json(['status' => 'ok']);
     }
 
-    public function unlike(Product $product)
+    public function unlike(Product $product, User $user)
     {
-        Auth::user()->unlike($product);
+        $user->unlike($product);
         return response()->json(['status' => 'ok']);
     }
-
 
     public function insert(Request $request)
     {
