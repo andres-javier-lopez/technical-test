@@ -29,6 +29,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function purchases()
+    {
+        return $this->hasMany('App\Purchases', 'buyer_id');
+    }
+
     public function likedProducts()
     {
         return $this->belongsToMany('App\Product', 'products_users_likes')->withTimestamps();

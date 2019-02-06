@@ -10,4 +10,9 @@ class Product extends Model
     {
         return $this->belongsToMany('App\User', 'products_users_likes')->withTimestamps();
     }
+
+    public function purchases()
+    {
+        return $this->hasMany('App\Purchases');
+    }
 }

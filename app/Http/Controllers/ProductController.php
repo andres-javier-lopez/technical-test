@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Product;
+use App\Purchase;
 use App\User;
 use App\Http\Resources\Product as ProductResource;
 use App\Http\Resources\Products as ProductsResource;
+use App\Http\Resources\Purchase as PurchaseResource;
 
 class ProductController extends Controller
 {
@@ -77,5 +79,24 @@ class ProductController extends Controller
         return response()->json([
             'status' => 'ok'
         ]);
+    }
+
+    public function purchase(Request $request, Product $product)
+    {
+        $buyer = Auth::user();
+        $quantity = (int) $request->input('quantity');
+
+        $purchase = new Purchase();
+        $purchase->product_id = $product->id;
+        $purchase->buyer_id = $buyer->id;
+        $purchase->quantity = $quantity;
+        $purchase->unit_price = $product->price;
+        $purchase->total = $quantity*$product->price;
+        $purchase->save();
+
+        $product->stock = $product->stock - $quantity;
+        $product->save();
+
+        return new PurchaseResource($purchase->fresh());
     }
 }

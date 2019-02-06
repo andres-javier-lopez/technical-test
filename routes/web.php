@@ -30,3 +30,4 @@ Route::post('/products/{product}/unlike/{user}', 'ProductController@unlike')->mi
 Route::post('/products/new', 'ProductController@insert')->middleware('auth:api', 'admin');
 Route::put('/products/{product}', 'ProductController@update')->middleware('auth:api', 'admin');
 Route::delete('/products/{product}', 'ProductController@delete')->middleware('auth:api', 'admin');
+Route::post('/products/{product}/purchase', 'ProductController@purchase')->middleware('auth:api');
