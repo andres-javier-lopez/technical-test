@@ -6,6 +6,8 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class Products extends ResourceCollection
 {
+    public $collects = 'App\Http\Resources\Product';
+
     /**
      * Transform the resource collection into an array.
      *

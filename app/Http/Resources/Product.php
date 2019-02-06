@@ -20,7 +20,7 @@ class Product extends JsonResource
             'description' => $this->description,
             'price' => $this->price,
             'stock' => $this->stock,
-            'likes' => $this->likes_count,
+            'likes' => $this->when($this->likes_count, $this->likes_count, $this->likes()->count()),
         ];
     }
 }

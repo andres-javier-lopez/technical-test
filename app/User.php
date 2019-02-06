@@ -31,15 +31,15 @@ class User extends Authenticatable
 
     public function likedProducts()
     {
-        $this->belongsToMany('App\Product', 'products_users_likes')->withTimestamps();
+        return $this->belongsToMany('App\Product', 'products_users_likes')->withTimestamps();
     }
 
-    public function like(App\Product $product)
+    public function like(Product $product)
     {
-        $this->likedProducts()->attach($product->id);
+        $this->likedProducts()->syncWithoutDetaching([$product->id]);
     }
 
-    public function unlike(App\Product $product)
+    public function unlike(Product $product)
     {
         $this->likedProducts()->detach($product->id);
     }

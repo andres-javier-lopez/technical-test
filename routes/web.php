@@ -21,4 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/products', 'ProductController@index');
 Route::get('/products/{product}', 'ProductController@show');
+Route::post('/products/{product}/like', 'ProductController@like')->middleware('auth:api');
+Route::post('/products/{product}/unlike', 'ProductController@unlike')->middleware('auth:api');
 Route::post('/products/new', 'ProductController@insert')->middleware('auth:api');
