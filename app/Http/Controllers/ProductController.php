@@ -25,12 +25,12 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
-        $id = $product->save();
+        $product->save();
 
         return response()->json([
             'status' => 'ok',
-            'product_id' => $id,
-            'link' => action('ProductController@show', ['product' => $id]),
+            'product_id' => $product->id,
+            'link' => action('ProductController@show', ['product' => $product->id]),
         ]);
     }
 }
