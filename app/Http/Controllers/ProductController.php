@@ -41,12 +41,41 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         $product->save();
 
-        return response()->json([
-            'status' => 'ok',
-            'product_id' => $product->id,
-            'link' => action('ProductController@show', ['product' => $product->id]),
-        ]);
+        return new ProductResource($product->fresh());
     }
 
+    public function update(Request $request, Product $product)
+    {
+        if($request->has('name'))
+        {
+            $product->name = $request->input('name');
+        }
 
+        if($request->has('description'))
+        {
+            $product->description = $request->input('description');
+        }
+
+        if($request->has('price'))
+        {
+            $product->price = $request->input('price');
+        }
+
+        if($request->has('stock'))
+        {
+            $product->stock = $request->input('stock');
+        }
+
+        $product->save();
+
+        return new ProductResource($product);
+    }
+
+    public function delete(Product $product)
+    {
+        $product->delete();
+        return response()->json([
+            'status' => 'ok'
+        ]);
+    }
 }

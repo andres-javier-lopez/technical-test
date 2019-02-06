@@ -15,12 +15,15 @@ class Product extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'price' => $this->price,
-            'stock' => $this->stock,
-            'likes' => $this->when($this->likes_count, $this->likes_count, $this->likes()->count()),
+            'data' => [
+                'id' => $this->id,
+                'name' => $this->name,
+                'description' => $this->description,
+                'price' => $this->price,
+                'stock' => $this->stock,
+                'likes' => $this->when($this->likes_count, $this->likes_count, $this->likes()->count()),
+            ],
+            'link' => action('ProductController@show', ['product' => $this->id]),
         ];
     }
 }
