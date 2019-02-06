@@ -13,4 +13,24 @@ class ProductController extends Controller
     {
         return new ProductsResource(Product::withCount('likes')->paginate());
     }
+
+    public function show(Product $product)
+    {
+        return new ProductResource($product);
+    }
+
+    public function insert(Request $request)
+    {
+        $product = new Product();
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $id = $product->save();
+
+        return response()->json([
+            'status' => 'ok',
+            'product_id' => $id,
+            'link' => action('ProductController@show', ['product' => $id]),
+        ]);
+    }
 }

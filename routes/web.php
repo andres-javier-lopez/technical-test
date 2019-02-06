@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/products', 'ProductController@index');
+Route::get('/products/{product}', 'ProductController@show');
+Route::post('/products/new', 'ProductController@insert')->middleware('auth:api');
