@@ -14,9 +14,28 @@ use App\Events\PriceModified;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return new ProductsResource(Product::withCount('likes')->paginate());
+        $query = Product::withCount('likes');
+
+        if($request->has('search'))
+        {
+            $search = $request->input('search');
+            $query->where('name', 'like', "$search%");
+        }
+
+        switch($request->input('order'))
+        {
+            case 'popularity':
+                $query->orderBy('likes_count', 'desc')->orderBy('name', 'asc');
+                break;
+            case 'name':
+            default:
+                $query->orderBy('name', 'asc');
+        }
+
+        $products = $query->paginate();
+        return new ProductsResource($products);
     }
 
     public function show(Product $product)

@@ -33,6 +33,9 @@ To test the API using Postman, you should do the following:
 
 The API has the following endpoints:
 * GET http://localhost:8000/products to show the list of all available products. This is available without authentication.
+* * You can send the _order_ parmeter to sort the list by _popularity_ or _name_.
+* * You can send the _search_ parameter to search the products by name.
+* * You can send the _page_ parameter to paginate the results.
 * POST http://localhost:8000/products/new to insert a new product. This is only available with an administrator account.
 * GET http://localhost:8000/products/<product_id> to obtain the information of an individual product. This is available without authentication.
 * PUT http://localhost:8000/products/<product_id> to modify an existing product. Values that can be modified are _name_, _description_, _price_ and _stock_. This is only available with an administrator account.
