@@ -59,6 +59,7 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
+        $product->stock = $request->input('stock');
         $product->save();
 
         return new ProductResource($product->fresh());
