@@ -89,6 +89,11 @@ class ProductController extends Controller
         $buyer = Auth::user();
         $quantity = (int) $request->input('quantity');
 
+        if($quantity > $product->stock)
+        {
+            return response('Not enough product on stock', 500)->header('Content-Type', 'text/plain');
+        }
+
         $purchase = new Purchase();
         $purchase->product_id = $product->id;
         $purchase->buyer_id = $buyer->id;
