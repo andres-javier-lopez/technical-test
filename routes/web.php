@@ -19,6 +19,8 @@ Route::get('/csrf', function(){
     return csrf_token();
 });
 
+Route::get('/request-token', 'ClientController@requestToken')->middleware('auth');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

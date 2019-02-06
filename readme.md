@@ -14,20 +14,14 @@ To install the software follow the following instructions:
   * Create an empty database file, you can use the command `touch database/database.sqlite`.
 * Install the database running `php artisan migrate --seed`. This will create the database and populate it with default data.
 * Generate the keys for the API client running `php artisan passport:install`.
-* Generate the clients for the API using `php artisan passport:client`. Use the following data for the admin client: user Id = 1, client = admin, callback = http://localhost:8000. For the regular cliente use: user Id = 2, client = test, callback = http://localhost:8000. You should take note of the client secrets.
 * Start the server with `php artisan serve`. Project should be running on http://localhost:8000.
 
 ### API test environment
 
 To test the API using Postman, you should do the following:
-* On the Authorization tab, select OAuth 2.0 and click on `Get New Access Token`. Use the following data:
-  * Callback URL: http://localhost:8000
-  * Auth URL: http://localhost:8000/oauth/authorize
-  * Access Token URL: http://localhost:8000/oauth/token
-  * Use Client ID and Client Secret generated during installation for the admin and regular users.
-  * You will need to log into the application. User credentials for admin are: admin@email.com with password **123456**, and for regular user are: test@email.com with password **123456**. You should generate a token for each user.
-* The application also need a CSRF token. For this applicaton purposes, you can consult the CSRF token on http://localhost:8000/csrf. You should get the token from inside Postman.
-* Add a new header to Postman requests `X-CSRF-TOKEN` with the token information.
+* Obtain a personal access token on http://localhost:8000/request-token. You should generate a token for admin and regular user. Admin user is `admin@email.com` and regular user is `test@email.com`. Both passwords are **123456**.
+* On the Authorization tab, select OAuth 2.0 and paste the personal access token previously obtained.
+* The application also need a CSRF token. For this applicaton purposes, you can consult the CSRF token on http://localhost:8000/csrf. You should get the token from inside Postman. Add a new header to Postman requests `X-CSRF-TOKEN` with the token information.
 
 ### API endpoints
 
