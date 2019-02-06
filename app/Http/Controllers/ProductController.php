@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Product;
 use App\Purchase;
-use App\User;
 use App\Http\Resources\Product as ProductResource;
 use App\Http\Resources\Products as ProductsResource;
 use App\Http\Resources\Purchase as PurchaseResource;
@@ -43,15 +42,15 @@ class ProductController extends Controller
         return new ProductResource($product);
     }
 
-    public function like(Product $product, User $user)
+    public function like(Product $product)
     {
-       $user->like($product);
+        Auth::user()->like($product);
         return response()->json(['status' => 'ok']);
     }
 
-    public function unlike(Product $product, User $user)
+    public function unlike(Product $product)
     {
-        $user->unlike($product);
+        Auth::user()->unlike($product);
         return response()->json(['status' => 'ok']);
     }
 

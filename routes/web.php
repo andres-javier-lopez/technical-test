@@ -25,8 +25,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/products', 'ProductController@index');
 Route::get('/products/{product}', 'ProductController@show');
-Route::post('/products/{product}/like/{user}', 'ProductController@like')->middleware('auth:api');
-Route::post('/products/{product}/unlike/{user}', 'ProductController@unlike')->middleware('auth:api');
+Route::post('/products/{product}/like', 'ProductController@like')->middleware('auth:api');
+Route::post('/products/{product}/unlike', 'ProductController@unlike')->middleware('auth:api');
 Route::post('/products/new', 'ProductController@insert')->middleware('auth:api', 'admin');
 Route::put('/products/{product}', 'ProductController@update')->middleware('auth:api', 'admin');
 Route::delete('/products/{product}', 'ProductController@delete')->middleware('auth:api', 'admin');

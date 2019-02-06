@@ -1,6 +1,6 @@
 ## Installation instructions
 
-This software requires php, composer and sqlite support as minimum requirements to run. This instructions
+This software requires **php**, **composer** and **sqlite** support as minimum requirements to run. This instructions
 have been created using a `bash` console as the configuration tool.
 
 ### Software installation
@@ -41,7 +41,7 @@ The API has the following endpoints:
 * PUT http://localhost:8000/products/<product_id> to modify an existing product. Values that can be modified are _name_, _description_, _price_ and _stock_. This is only available with an administrator account.
 * DELETE http://localhost:8000/products/<product_id> to delete an existing product. This is only available with an administrator account.
 * POST http://localhost:8000/products/<product_id>/purchase to purchase a product. The purchase _quantity_ is sent as a parameter.
-* POST http://localhost:8000/<product_id>/like/<user_id> to like a product with the provided user.
-* POST http://localhost:8000/<product_id>/unlike/<user_id> to eliminate the like of a product with the provided user.
+* POST http://localhost:8000/<product_id>/like to like a product with the authenticated user.
+* POST http://localhost:8000/<product_id>/unlike to eliminate the like of a product with the authenticated user.
 * GET http://localhost:8000/purchase_history to get a list of all purchases.
 * GET http://localhost:8000/price_history to get a list of all the price modifications.
